@@ -1,6 +1,5 @@
 import app from './app'
-
-const port = '3000'
+import { port } from './constants'
 
 app.listen(port, () => {
   console.log('Server running on port ' + port + '!')
