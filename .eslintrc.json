@@ -25,5 +25,10 @@
     },
     "ignorePatterns": [
         "node_modules/"
-    ]
+    ],
+    "rules": {
+        "@typescript-eslint/strict-boolean-expressions": [2,  {
+            "allowNullableBoolean": true
+        }]
+    }
 }
