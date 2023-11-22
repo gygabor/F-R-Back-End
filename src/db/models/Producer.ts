@@ -1,7 +1,8 @@
 import mongoose, { Schema } from 'mongoose'
-import type { Document } from 'mongoose'
+import type { Document, Types } from 'mongoose'
 
-interface IProducer extends Document {
+export interface IProducer extends Document {
+  _id: Types.ObjectId
   name: string
   country?: string
   region?: string
