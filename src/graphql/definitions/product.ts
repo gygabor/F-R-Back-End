@@ -1,3 +1,6 @@
+import { saveProduct } from '../../services/db'
+import type { ProductType } from '@src/types'
+
 export const Product =
 `type Product {
   name: String!
@@ -9,25 +12,21 @@ export const ProductInput =
 `input ProductInput {
   name: String!
   vintage: String!
-  producerId: String!
+  producer: String!
 }`
 
 export const CreateProducts = `
   createProducts(products: [ProductInput!]!): [Product!]!
 `
-interface ProductType {
-  name: string
-  vintage: string
-  producerId: string
-}
 
 interface Props {
   products: ProductType[]
 }
 
 export const productResolvers = {
-  createProducts: ({ products }: Props) => {
+  createProducts: async ({ products }: Props) => {
     console.log(products)
+    await saveProduct(products)
     return products
   }
 }
