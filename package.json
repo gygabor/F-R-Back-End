@@ -1,0 +1,11 @@
+{
+  "name": "F-R back-end",
+  "version": "1.0.0",
+  "description": "Simple product api, which manages product and producer entities.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gabor Gyorgy <gyorgyg@gmail.com>",
+  "license": "ISC"
+}
