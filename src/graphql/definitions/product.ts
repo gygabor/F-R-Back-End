@@ -1,3 +1,4 @@
+import { csvUrl } from '@src/constants'
 import {
   getProduct,
   saveProduct,
@@ -5,6 +6,7 @@ import {
   updateProduct,
   deleteProducts
 } from '@src/services/db'
+import fetchCsv from '@src/services/fetchCsv'
 import type { ProductType, UpdateProductType } from '@src/types'
 
 export const ProductTypes = `
@@ -38,6 +40,7 @@ export const ProductsMutation = `
   createProducts(products: [ProductInput!]!): String!
   updateProduct(product: UpdateProductInput!): String!
   deleteProducts(_ids: [String!]!): String!
+  fetchProducts: String!
 `
 
 interface CreateProps {
@@ -77,6 +80,10 @@ export const productResolvers = {
   },
   updateProduct: async ({ product }: UpdateProductProps) => {
     await updateProduct(product)
+    return 'ok'
+  },
+  fetchProducts: async () => {
+    await fetchCsv(csvUrl)
     return 'ok'
   }
 }
