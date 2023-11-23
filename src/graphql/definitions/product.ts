@@ -13,11 +13,11 @@ export const ProductInput =
 `input ProductInput {
   name: String!
   vintage: String!
-  producer: String!
+  producer: ProducerInput!
 }`
 
 export const CreateProducts = `
-  createProducts(products: [ProductInput!]!): [Product!]!
+  createProducts(products: [ProductInput!]!): String!
 `
 
 interface Props {
@@ -26,7 +26,8 @@ interface Props {
 
 export const productResolvers = {
   createProducts: async ({ products }: Props) => {
-    console.log(products)
-    return await saveProduct(products)
+    const p = await saveProduct(products)
+    console.log(p)
+    return 'ok'
   }
 }
