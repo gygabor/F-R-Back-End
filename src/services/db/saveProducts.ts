@@ -1,10 +1,9 @@
 import { Product } from '@src/db/models'
 import type { ProductType } from '@src/types'
 import getProducer from './getProducer'
-import type { IProduct } from '@src/db/models/Product'
 import saveProducer from './saveProducer'
 
-const saveProducts = async (products: ProductType[]): Promise<IProduct[]> => {
+const saveProducts = async (products: ProductType[]): Promise<void> => {
   const updatedProducts = await Promise.all(products.map(async (product) => {
     let producer = await getProducer(product.producer)
 
@@ -19,7 +18,7 @@ const saveProducts = async (products: ProductType[]): Promise<IProduct[]> => {
     }
   }))
 
-  return await Product.create(updatedProducts)
+  await Product.create(updatedProducts)
 }
 
 export default saveProducts
