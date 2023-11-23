@@ -1,6 +1,7 @@
 import { buildSchema } from 'graphql'
 import {
   Producer,
+  ProducerInput,
   Product,
   CreateProducts,
   ProductInput
@@ -8,6 +9,7 @@ import {
 
 const schema = buildSchema(`
   ${Producer}
+  ${ProducerInput}
   ${Product}
   ${ProductInput}
 

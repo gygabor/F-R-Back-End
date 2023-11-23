@@ -3,6 +3,7 @@ import type { ProductType } from '@src/types'
 
 export const Product =
 `type Product {
+  _id: ID!
   name: String!
   vintage: String!
   producer: Producer!
@@ -12,11 +13,11 @@ export const ProductInput =
 `input ProductInput {
   name: String!
   vintage: String!
-  producer: String!
+  producer: ProducerInput!
 }`
 
 export const CreateProducts = `
-  createProducts(products: [ProductInput!]!): [Product!]!
+  createProducts(products: [ProductInput!]!): String!
 `
 
 interface Props {
@@ -25,8 +26,8 @@ interface Props {
 
 export const productResolvers = {
   createProducts: async ({ products }: Props) => {
-    console.log(products)
-    await saveProduct(products)
-    return products
+    const p = await saveProduct(products)
+    console.log(p)
+    return 'ok'
   }
 }

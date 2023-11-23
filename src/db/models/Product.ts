@@ -1,10 +1,10 @@
 import mongoose, { Schema } from 'mongoose'
 import type { Document } from 'mongoose'
 
-interface IProduct extends Document {
+export interface IProduct extends Document {
   name: string
   vintage: string
-  producerId: string
+  producerId: mongoose.Types.ObjectId
 }
 
 const ProductSchema: Schema = new Schema({
