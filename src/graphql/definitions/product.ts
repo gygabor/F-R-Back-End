@@ -3,6 +3,7 @@ import type { ProductType } from '@src/types'
 
 export const Product =
 `type Product {
+  _id: ID!
   name: String!
   vintage: String!
   producer: Producer!
@@ -26,7 +27,6 @@ interface Props {
 export const productResolvers = {
   createProducts: async ({ products }: Props) => {
     console.log(products)
-    await saveProduct(products)
-    return products
+    return await saveProduct(products)
   }
 }

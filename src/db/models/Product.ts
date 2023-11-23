@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose'
 import type { Document } from 'mongoose'
 
-interface IProduct extends Document {
+export interface IProduct extends Document {
   name: string
   vintage: string
   producerId: string
