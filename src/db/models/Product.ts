@@ -4,7 +4,7 @@ import type { Document } from 'mongoose'
 export interface IProduct extends Document {
   name: string
   vintage: string
-  producerId: string
+  producerId: mongoose.Types.ObjectId
 }
 
 const ProductSchema: Schema = new Schema({
