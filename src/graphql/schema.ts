@@ -1,18 +1,14 @@
 import { buildSchema } from 'graphql'
 import {
-  Producer,
-  ProducerInput,
-  Product,
+  ProducerTypes,
+  ProductTypes,
   ProductQuery,
-  ProductsMutation,
-  ProductInput
+  ProductsMutation
 } from './definitions'
 
 const schema = buildSchema(`
-  ${Producer}
-  ${ProducerInput}
-  ${Product}
-  ${ProductInput}
+  ${ProducerTypes}
+  ${ProductTypes}
 
   type Query {
     ${ProductQuery}
