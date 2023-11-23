@@ -1,20 +1,32 @@
-import { getProduct, saveProduct, getProductsByProducer } from '@src/services/db'
-import type { ProductType } from '@src/types'
+import {
+  getProduct,
+  saveProduct,
+  getProductsByProducer,
+  updateProduct
+} from '@src/services/db'
+import type { ProductType, UpdateProductType } from '@src/types'
 
-export const Product =
-`type Product {
-  _id: ID!
-  name: String!
-  vintage: String!
-  producer: Producer!
-}`
+export const ProductTypes = `
+  type Product {
+    _id: ID!
+    name: String!
+    vintage: String!
+    producer: Producer!
+  }
 
-export const ProductInput =
-`input ProductInput {
-  name: String!
-  vintage: String!
-  producer: ProducerInput!
-}`
+  input ProductInput {
+    name: String!
+    vintage: String!
+    producer: ProducerInput!
+  }
+
+  input UpdateProductInput {
+    _id: String!
+    name: String
+    vintage: String
+    producerId: String
+  }
+`
 
 export const ProductQuery = `
   product(_id: String!): Product!
@@ -23,6 +35,7 @@ export const ProductQuery = `
 
 export const ProductsMutation = `
   createProducts(products: [ProductInput!]!): String!
+  updateProduct(product: UpdateProductInput!): String!
 `
 
 interface CreateProps {
@@ -37,6 +50,10 @@ interface ProductByProduceProps {
   producerId: string
 }
 
+interface UpdateProductProps {
+  product: UpdateProductType
+}
+
 export const productResolvers = {
   product: async ({ _id }: ProductProps) => {
     return await getProduct(_id)
@@ -46,6 +63,10 @@ export const productResolvers = {
   },
   createProducts: async ({ products }: CreateProps) => {
     await saveProduct(products)
+    return 'ok'
+  },
+  updateProduct: async ({ product }: UpdateProductProps) => {
+    await updateProduct(product)
     return 'ok'
   }
 }
