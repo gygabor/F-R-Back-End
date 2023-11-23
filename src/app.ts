@@ -1,4 +1,9 @@
 import express from 'express'
+import type {
+  Request,
+  Response,
+  NextFunction
+} from 'express'
 import { graphqlHTTP } from 'express-graphql'
 import { schema, resolvers } from './graphql'
 import connectDb from './db'
@@ -11,7 +16,7 @@ connectDb().catch((error) => {
 
 app.use(
   '/graphql',
-  (req, res, next) => {
+  (req: Request, res: Response, next: NextFunction) => {
     graphqlHTTP({
       schema,
       rootValue: resolvers,
