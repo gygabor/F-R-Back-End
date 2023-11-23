@@ -6,7 +6,7 @@ import {
   updateProduct,
   deleteProducts
 } from '@src/services/db'
-import fetchCsv from '@src/services/fetchCsv'
+import fetchCsv from '@src/services/csv'
 import type { ProductType, UpdateProductType } from '@src/types'
 
 export const ProductTypes = `
