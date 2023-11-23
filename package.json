@@ -1,5 +1,5 @@
 {
-  "name": "F-R back-end",
+  "name": "F+R back-end",
   "version": "1.0.0",
   "description": "Simple product api, which manages product and producer entities.",
   "main": "dist/index.ts",
