@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { dbUrl } from '../constants'
+import { dbUrl } from '@src/constants'
 
 const connectDb = async (): Promise<void> => {
   await mongoose.connect(dbUrl)
