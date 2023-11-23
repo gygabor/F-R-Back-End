@@ -4,7 +4,7 @@ import {
   ProducerInput,
   Product,
   ProductQuery,
-  CreateProductsMutation,
+  ProductsMutation,
   ProductInput
 } from './definitions'
 
@@ -19,7 +19,7 @@ const schema = buildSchema(`
   }
 
   type Mutation {
-    ${CreateProductsMutation}
+    ${ProductsMutation}
   }
 `)
 
