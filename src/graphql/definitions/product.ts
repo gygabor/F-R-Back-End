@@ -1,4 +1,4 @@
-import { getProduct, saveProduct } from '@src/services/db'
+import { getProduct, saveProduct, getProductsByProducer } from '@src/services/db'
 import type { ProductType } from '@src/types'
 
 export const Product =
@@ -18,9 +18,10 @@ export const ProductInput =
 
 export const ProductQuery = `
   product(_id: String!): Product!
+  productsByProducer(producerId: String!): [Product!]!
 `
 
-export const CreateProductsMutation = `
+export const ProductsMutation = `
   createProducts(products: [ProductInput!]!): String!
 `
 
@@ -32,9 +33,16 @@ interface ProductProps {
   _id: string
 }
 
+interface ProductByProduceProps {
+  producerId: string
+}
+
 export const productResolvers = {
   product: async ({ _id }: ProductProps) => {
     return await getProduct(_id)
+  },
+  productsByProducer: async ({ producerId }: ProductByProduceProps) => {
+    return await getProductsByProducer(producerId)
   },
   createProducts: async ({ products }: CreateProps) => {
     await saveProduct(products)
