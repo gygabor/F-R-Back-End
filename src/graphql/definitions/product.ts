@@ -2,7 +2,8 @@ import {
   getProduct,
   saveProduct,
   getProductsByProducer,
-  updateProduct
+  updateProduct,
+  deleteProducts
 } from '@src/services/db'
 import type { ProductType, UpdateProductType } from '@src/types'
 
@@ -36,6 +37,7 @@ export const ProductQuery = `
 export const ProductsMutation = `
   createProducts(products: [ProductInput!]!): String!
   updateProduct(product: UpdateProductInput!): String!
+  deleteProducts(_ids: [String!]!): String!
 `
 
 interface CreateProps {
@@ -54,6 +56,10 @@ interface UpdateProductProps {
   product: UpdateProductType
 }
 
+interface DeleteProductsProps {
+  _ids: string[]
+}
+
 export const productResolvers = {
   product: async ({ _id }: ProductProps) => {
     return await getProduct(_id)
@@ -63,6 +69,10 @@ export const productResolvers = {
   },
   createProducts: async ({ products }: CreateProps) => {
     await saveProduct(products)
+    return 'ok'
+  },
+  deleteProducts: async ({ _ids }: DeleteProductsProps) => {
+    await deleteProducts(_ids)
     return 'ok'
   },
   updateProduct: async ({ product }: UpdateProductProps) => {
