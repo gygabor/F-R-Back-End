@@ -82,7 +82,7 @@ query Product($_id: String!) {
 Variable:
 ```json
 {
-  "_id": "<product ID>"
+  "_id": "product ID"
 }
 ```
 
@@ -91,7 +91,7 @@ With curl:
 ```bash
 curl --location 'http://localhost:3000/graphql' \
 --header 'Content-Type: application/json' \
---data '{"query":"query Product($_id: String!) {\n  product(_id: $_id) {\n    _id\n    name\n    vintage\n    producer {\n      _id\n      name\n    }\n  }\n}","variables":{"_id":<product ID>}}'
+--data '{"query":"query Product($_id: String!) {\n  product(_id: $_id) {\n    _id\n    name\n    vintage\n    producer {\n      _id\n      name\n    }\n  }\n}","variables":{"_id":"product ID"}}'
 ```
 
 #### Query Products by Producer
@@ -111,7 +111,7 @@ query ProductsByProducer($producerId: String!) {
 Variable:
 ```json
 {
-  "producerId": "<producer ID>"
+  "producerId": "producer ID"
 }
 ```
 
