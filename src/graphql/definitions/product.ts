@@ -1,4 +1,4 @@
-import { csvUrl } from '@src/constants'
+import { CSV_URL } from '@src/constants'
 import {
   getProduct,
   saveProduct,
@@ -83,7 +83,7 @@ export const productResolvers = {
     return 'ok'
   },
   fetchProducts: async () => {
-    await fetchCsv(csvUrl)
+    await fetchCsv(CSV_URL)
     return true
   }
 }
