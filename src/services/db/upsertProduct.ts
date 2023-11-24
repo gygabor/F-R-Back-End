@@ -1,16 +1,11 @@
-import { Product, Producer } from '@src/db/models'
+import { Product } from '@src/db/models'
 import type { ProductType } from '@src/types'
+import upsertProducer from './upsertProducer'
 
-const upsert = async (products: ProductType[]): Promise<void> => {
+const upsertProducts = async (products: ProductType[]): Promise<void> => {
   try {
     await Promise.all(products.map(async (prod) => {
-      await Producer.findOneAndUpdate(
-        { name: prod.producer.name },
-        prod.producer,
-        { upsert: true, new: true }
-      )
-
-      const producer = new Producer(prod.producer)
+      const producer = await upsertProducer(prod.producer)
 
       const product = {
         name: prod.name,
@@ -29,4 +24,4 @@ const upsert = async (products: ProductType[]): Promise<void> => {
   }
 }
 
-export default upsert
+export default upsertProducts

@@ -1,15 +1,10 @@
 import { Product } from '@src/db/models'
 import type { ProductType } from '@src/types'
-import getProducer from './getProducer'
-import saveProducer from './saveProducer'
+import upsertProducer from './upsertProducer'
 
 const saveProducts = async (products: ProductType[]): Promise<void> => {
   const updatedProducts = await Promise.all(products.map(async (product) => {
-    let producer = await getProducer(product.producer)
-
-    if (!producer) {
-      producer = await saveProducer(product.producer)
-    }
+    const producer = await upsertProducer(product.producer)
 
     return {
       name: product.name,
