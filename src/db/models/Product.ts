@@ -1,7 +1,8 @@
 import mongoose, { Schema } from 'mongoose'
-import type { Document } from 'mongoose'
+import type { Document, Types } from 'mongoose'
 
 export interface IProduct extends Document {
+  _id: Types.ObjectId
   name: string
   vintage: string
   producerId: mongoose.Types.ObjectId

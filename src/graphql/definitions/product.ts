@@ -16,6 +16,13 @@ export const ProductTypes = `
     producer: Producer!
   }
 
+  type ProductInfo {
+    _id: ID!
+    name: String!
+    vintage: String!
+    producerId: String!
+  }
+
   input ProductInput {
     name: String!
     vintage: String!
@@ -36,7 +43,7 @@ export const ProductQuery = `
 `
 
 export const ProductsMutation = `
-  createProducts(products: [ProductInput!]!): String!
+  createProducts(products: [ProductInput!]!): [ProductInfo!]!
   updateProduct(product: UpdateProductInput!): String!
   deleteProducts(_ids: [String!]!): String!
   fetchProducts(url: String!): String!
@@ -74,8 +81,7 @@ export const productResolvers = {
     return await getProductsByProducer(producerId)
   },
   createProducts: async ({ products }: CreateProps) => {
-    await saveProduct(products)
-    return 'ok'
+    return await saveProduct(products)
   },
   deleteProducts: async ({ _ids }: DeleteProductsProps) => {
     await deleteProducts(_ids)
