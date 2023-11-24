@@ -1,3 +1,5 @@
+import { getProducers } from "@src/services/db"
+
 export const ProducerTypes = `
   type Producer {
     _id: ID!
@@ -12,3 +14,12 @@ export const ProducerTypes = `
     region: String
   }
 `
+
+export const ProducerQuery = `
+  producers: [Producer!]!
+`
+export const producerResolvers = {
+  producers: async () => {
+    return await getProducers()
+  },
+}

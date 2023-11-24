@@ -3,7 +3,8 @@ import {
   ProducerTypes,
   ProductTypes,
   ProductQuery,
-  ProductsMutation
+  ProductsMutation,
+  ProducerQuery
 } from './definitions'
 
 const schema = buildSchema(`
@@ -12,6 +13,7 @@ const schema = buildSchema(`
 
   type Query {
     ${ProductQuery}
+    ${ProducerQuery}
   }
 
   type Mutation {

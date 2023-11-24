@@ -40,7 +40,7 @@ export const ProductsMutation = `
   createProducts(products: [ProductInput!]!): String!
   updateProduct(product: UpdateProductInput!): String!
   deleteProducts(_ids: [String!]!): String!
-  fetchProducts: String!
+  fetchProducts(url: String!): String!
 `
 
 interface CreateProps {
@@ -63,6 +63,10 @@ interface DeleteProductsProps {
   _ids: string[]
 }
 
+interface FetchProductsProps {
+  url: string
+}
+
 export const productResolvers = {
   product: async ({ _id }: ProductProps) => {
     return await getProduct(_id)
@@ -82,8 +86,8 @@ export const productResolvers = {
     await updateProduct(product)
     return 'ok'
   },
-  fetchProducts: async () => {
-    await fetchCsv(csvUrl)
+  fetchProducts: async ({ url }: FetchProductsProps) => {
+    await fetchCsv(url)
     return true
   }
 }
