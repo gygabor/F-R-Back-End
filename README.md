@@ -150,7 +150,10 @@ curl --location 'http://localhost:3000/graphql' \
 
 ```gql
 mutation CreateProducts($products: [ProductInput!]!) {
-  createProducts(products: $products)
+  createProducts(products: $products) {
+    _id
+    name
+  }
 }
 ```
 
@@ -176,7 +179,7 @@ With curl:
 ```bash
 curl --location 'http://localhost:3000/graphql' \
 --header 'Content-Type: application/json' \
---data '{"query":"mutation CreateProducts($products: [ProductInput!]!) {\n  createProducts(products: $products)\n}","variables":{"products":[{"name":"Name","vintage":"Date","producer":{"name":"Producer Name","country":"Italy","region":"Calbaria"}}]}}'
+--data '{"query":"mutation CreateProducts($products: [ProductInput!]!) {\n  createProducts(products: $products) {\n    _id\n    name\n  }\n}","variables":{"products":[{"name":"Name","vintage":"Date","producer":{"name":"Producer Name","country":"Italy","region":"Calbaria"}}]}}'
 ```
 
 #### Create Products
