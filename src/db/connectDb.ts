@@ -1,10 +1,10 @@
-import { dbUrl } from '@src/constants'
+import { MONGO_URI } from '@src/constants'
 import mongoose from 'mongoose'
 
-const url = process.env.MONGO_DB || dbUrl
+const uri = process.env.MONGO_URI || MONGO_URI
 
 const connectDb = async (): Promise<void> => {
-  await mongoose.connect(url)
+  await mongoose.connect(uri)
   console.log('Connected to MongoDB')
 }
 
