@@ -271,9 +271,18 @@ curl --location 'http://localhost:3000/graphql' \
 
 #### Fetch Products fromCSV
 
+You can fetch the csv from this location: `https://api.frw.co.uk/feeds/all_listings.csv`
+
 ```gql
-mutation FetchProducts {
-  fetchProducts
+mutation FetchProducts($url: String!) {
+  fetchProducts(url: $url)
+}
+```
+
+Variable:
+```json
+{
+  "url": "https://api.frw.co.uk/feeds/all_listings.csv"
 }
 ```
 
@@ -282,5 +291,5 @@ With curl:
 ```bash
 curl --location 'http://localhost:3000/graphql' \
 --header 'Content-Type: application/json' \
---data '{"query":"mutation FetchProducts {\n  fetchProducts\n}","variables":{}}'
+--data '{"query":"mutation FetchProducts($url: String!) {\n  fetchProducts(url: $url)\n}\n","variables":{"url":"https://api.frw.co.uk/feeds/all_listings.csv"}}'
 ```

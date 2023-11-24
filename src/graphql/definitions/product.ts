@@ -1,4 +1,3 @@
-import { csvUrl } from '@src/constants'
 import {
   getProduct,
   saveProduct,
