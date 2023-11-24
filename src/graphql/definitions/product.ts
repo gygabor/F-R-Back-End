@@ -84,6 +84,6 @@ export const productResolvers = {
   },
   fetchProducts: async () => {
     await fetchCsv(csvUrl)
-    return 'ok'
+    return true
   }
 }
