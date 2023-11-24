@@ -1,7 +1,8 @@
-import { productResolvers } from './definitions'
+import { productResolvers, producerResolvers } from './definitions'
 
 const resolvers = {
-  ...productResolvers
+  ...productResolvers,
+  ...producerResolvers
 }
 
 export default resolvers
