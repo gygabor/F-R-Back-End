@@ -1,24 +1,30 @@
 import { Product } from '@src/db/models'
+import { Producer } from '@src/db/models'
 import type { ProductType } from '@src/types'
-import upsertProducer from './upsertProducer'
 
 const upsertProducts = async (products: ProductType[]): Promise<void> => {
   try {
-    await Promise.all(products.map(async (prod) => {
-      const producer = await upsertProducer(prod.producer)
+    const producers = await Producer.find()
 
-      const product = {
-        name: prod.name,
-        vintage: prod.vintage,
-        producerId: producer._id
+    const productOperations = products.map((product) => (
+      {
+        updateOne: {
+          filter: { 
+            name: product.name,
+            vintage: product.vintage
+          },
+          update: { 
+            name: product.name, 
+            vintage: product.vintage, 
+            producerId: producers.find((prod) => prod.name === product.producer.name)?._id 
+          },
+          upsert: true,
+        }
       }
+    ))
 
-      return await Product.findOneAndUpdate(
-        { name: product.name, vintage: product.vintage },
-        product,
-        { upsert: true, new: true }
-      )
-    }))
+    Product.bulkWrite(productOperations)
+
   } catch (err) {
     console.log(err)
   }
