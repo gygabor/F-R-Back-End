@@ -1,4 +1,3 @@
-export { default as saveProduct } from './saveProducts'
 export { default as getProductById } from './getProductById'
 export { default as getProductsByProducer } from './getProductsByProducer'
 export { default as updateProduct } from './updateProduct'

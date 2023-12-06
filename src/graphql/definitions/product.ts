@@ -1,6 +1,5 @@
 import {
   getProductById,
-  saveProduct,
   getProductsByProducer,
   updateProduct,
   deleteProducts
