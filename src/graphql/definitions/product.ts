@@ -1,5 +1,5 @@
 import {
-  getProduct,
+  getProductById,
   saveProduct,
   getProductsByProducer,
   updateProduct,
@@ -7,6 +7,7 @@ import {
 } from '@src/services/db'
 import fetchCsv from '@src/services/csv'
 import type { ProductType, UpdateProductType } from '@src/types'
+import { createProducts } from '@src/services/products'
 
 export const ProductTypes = `
   type Product {
@@ -14,13 +15,6 @@ export const ProductTypes = `
     name: String!
     vintage: String!
     producer: Producer!
-  }
-
-  type ProductInfo {
-    _id: ID!
-    name: String!
-    vintage: String!
-    producerId: String!
   }
 
   input ProductInput {
@@ -43,7 +37,7 @@ export const ProductQuery = `
 `
 
 export const ProductsMutation = `
-  createProducts(products: [ProductInput!]!): [ProductInfo!]!
+  createProducts(products: [ProductInput!]!): [Product!]!
   updateProduct(product: UpdateProductInput!): String!
   deleteProducts(_ids: [String!]!): String!
   fetchProducts(url: String!): String!
@@ -75,13 +69,13 @@ interface FetchProductsProps {
 
 export const productResolvers = {
   product: async ({ _id }: ProductProps) => {
-    return await getProduct(_id)
+    return await getProductById(_id)
   },
   productsByProducer: async ({ producerId }: ProductByProduceProps) => {
     return await getProductsByProducer(producerId)
   },
   createProducts: async ({ products }: CreateProps) => {
-    return await saveProduct(products)
+    return createProducts(products)
   },
   deleteProducts: async ({ _ids }: DeleteProductsProps) => {
     await deleteProducts(_ids)
