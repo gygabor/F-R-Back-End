@@ -2,7 +2,7 @@ import type { ProducerType } from '@src/types'
 import { Producer } from '@src/db/models'
 
 
-const upsertProducers = async (producers: ProducerType[]) => {
+const updateProducers = async (producers: ProducerType[]) => {
   const producerOperations = producers.map((producer) => (
     {
       updateOne: {
@@ -16,7 +16,7 @@ const upsertProducers = async (producers: ProducerType[]) => {
       }
     }
   ))
-  await Producer.bulkWrite(producerOperations)
+  return await Producer.bulkWrite(producerOperations)
 }
 
-export default upsertProducers
+export default updateProducers
