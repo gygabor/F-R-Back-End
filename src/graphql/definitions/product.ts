@@ -1,12 +1,11 @@
 import {
   getProductById,
   getProductsByProducer,
-  updateProduct,
   deleteProducts
 } from '@src/services/db'
 import fetchCsv from '@src/services/csv'
 import type { ProductType, UpdateProductType } from '@src/types'
-import { createProducts } from '@src/services/products'
+import { createProducts, updateProduct } from '@src/services/products'
 
 export const ProductTypes = `
   type Product {
@@ -26,7 +25,7 @@ export const ProductTypes = `
     _id: String!
     name: String
     vintage: String
-    producerId: String
+    producer: ProducerInput
   }
 `
 
@@ -37,7 +36,7 @@ export const ProductQuery = `
 
 export const ProductsMutation = `
   createProducts(products: [ProductInput!]!): [Product!]!
-  updateProduct(product: UpdateProductInput!): String!
+  updateProduct(product: UpdateProductInput!): Product!
   deleteProducts(_ids: [String!]!): String!
   fetchProducts(url: String!): String!
 `
@@ -81,8 +80,7 @@ export const productResolvers = {
     return 'ok'
   },
   updateProduct: async ({ product }: UpdateProductProps) => {
-    await updateProduct(product)
-    return 'ok'
+    return await updateProduct(product)
   },
   fetchProducts: async ({ url }: FetchProductsProps) => {
     await fetchCsv(url)
