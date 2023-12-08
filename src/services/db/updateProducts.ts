@@ -1,13 +1,12 @@
 import { Product } from '@src/db/models'
-import type { ProductType } from '@src/types'
-import { CreateProductOperation } from '../products/types'
+import { CreateProductOperation, UpdateProductOperation } from '../products/types'
 
 interface BulkWriteResult {
   upsertedIds: Record<number, any>
   insertedIds: Record<number, any>
 }
 
-const updateProducts = async (operations: CreateProductOperation[]): Promise<BulkWriteResult> => {
+const updateProducts = async (operations: CreateProductOperation[] | UpdateProductOperation[]): Promise<BulkWriteResult> => {
   const result = await Product.bulkWrite(operations)
   return {
     upsertedIds: result.upsertedIds,
